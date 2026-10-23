@@ -161,7 +161,7 @@ export const projectsData: ProjectData[] = [
       "A real-time Kanban project management tool featuring optimistic UI drag-and-drop, WebSocket live presence, and automated milestone tracking for distributed teams.",
     fullDescription:
       "NexusFlow helps engineering teams organize sprints, track deliverables, and manage task backlogs seamlessly. It features fluid drag-and-drop Kanban boards, markdown task descriptions, task assignment badges, and automated activity logs.",
-    liveUrl: "https://gearup-frontend-tawny.vercel.app",
+    liveUrl: "https://gearup-six-kohl.vercel.app",
     clientRepoUrl: "https://github.com/myunus-info/phero-batch7-assignment-5",
     serverRepoUrl: "https://github.com/myunus-info/phero-batch7-assignment-4",
     techStack: ["Next.js", "React", "TypeScript", "Express.js", "Prisma", "PostgreSQL", "Socket.io", "Tailwind CSS"],
