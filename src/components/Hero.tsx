@@ -1,23 +1,11 @@
 "use client";
 
-import * as React from "react";
 import Image from "next/image";
-import {
-  Calendar,
-  Github,
-  Linkedin,
-  Twitter,
-  Facebook,
-  ArrowRight,
-  Mail,
-  Download,
-  Terminal,
-} from "lucide-react";
+import { Calendar, Github, Linkedin, Twitter, Facebook, ArrowRight, Mail, Download, Terminal } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import type { ProfileData } from "@/lib/api";
 
 export function Hero({ profile }: { profile?: ProfileData | null }) {
-
   const socialLinks = [
     {
       name: "GitHub",
@@ -44,8 +32,8 @@ export function Hero({ profile }: { profile?: ProfileData | null }) {
   return (
     <section className="relative min-h-[85vh] flex items-center justify-center pt-28 pb-16 sm:pt-32 sm:pb-20 overflow-hidden">
       {/* Background Subtle Dot Grid & Radial Spotlight */}
-      <div className="absolute inset-0 bg-grid-pattern opacity-40 [mask-image:radial-gradient(ellipse_60%_50%_at_50%_25%,#000_60%,transparent_100%)] pointer-events-none" />
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[450px] bg-indigo-600/10 rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute inset-0 bg-grid-pattern opacity-40 mask-[radial-gradient(ellipse_60%_50%_at_50%_25%,#000_60%,transparent_100%)] pointer-events-none" />
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-162.5 h-112.5 bg-indigo-600/10 rounded-full blur-[150px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
@@ -134,7 +122,7 @@ export function Hero({ profile }: { profile?: ProfileData | null }) {
             <div className="pt-1 flex flex-wrap items-center justify-center lg:justify-start gap-3">
               <div className="flex items-center gap-2">
                 <span className="text-xs font-medium text-slate-400">Profiles:</span>
-                {socialLinks.map((s) => {
+                {socialLinks.map(s => {
                   const Icon = s.icon;
                   return (
                     <a
