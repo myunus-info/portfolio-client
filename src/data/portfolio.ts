@@ -233,7 +233,7 @@ export const projectsData: ProjectData[] = [
       "A modern headless e-commerce storefront featuring instant faceted search, persistent cart state, Stripe checkout, and transactional inventory reservations.",
     fullDescription:
       "PulseCommerce is a full-stack storefront and administrative portal designed for high-concurrency retail transactions. It handles product catalog filtering, cart persistence, promo codes, idempotent Stripe payment webhooks, and real-time inventory management.",
-    liveUrl: "https://devjudgelivecoding.vercel.app",
+    liveUrl: "https://gearup-six-kohl.vercel.app",
     clientRepoUrl: "https://github.com/myunus-info/gearup-frontend",
     serverRepoUrl: "https://github.com/myunus-info/gearup-server",
     techStack: [
