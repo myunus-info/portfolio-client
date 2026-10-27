@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ExternalLink, Github, ArrowRight, Terminal, Kanban, ShoppingCart } from "lucide-react";
+import { ExternalLink, Github, ArrowRight, Terminal, ShoppingCart } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -11,40 +11,44 @@ import type { ProjectData } from "@/lib/api";
 export function Projects({ projects = [] }: { projects?: ProjectData[] }) {
   const renderProjectVisual = (project: ProjectData) => {
     const isDevJudge = project.slug.includes("devjudge");
-    const isNexusFlow = project.slug.includes("nexusflow");
     const isPulseCommerce = project.slug.includes("pulsecommerce");
 
+    // Clean display domain
+    const cleanDomain = project.liveUrl ? project.liveUrl.replace("https://", "").replace(/\/$/, "") : "preview.app";
+
     return (
-      <div className="relative w-full aspect-16/10 overflow-hidden bg-slate-950 border-b border-slate-800">
+      <div className="relative w-full aspect-16/10 overflow-hidden bg-slate-950 border-b border-slate-800/80">
         {/* Browser Top Chrome Bar */}
-        <div className="h-7 bg-slate-900/90 border-b border-slate-800/80 px-3 flex items-center justify-between z-20 relative">
+        <div className="h-8 bg-slate-900/95 border-b border-slate-800/80 px-3.5 flex items-center justify-between z-20 relative select-none">
           <div className="flex items-center gap-1.5">
-            <span className="w-2.5 h-2.5 rounded-full bg-slate-700" />
-            <span className="w-2.5 h-2.5 rounded-full bg-slate-700" />
-            <span className="w-2.5 h-2.5 rounded-full bg-slate-700" />
+            <span className="w-2.5 h-2.5 rounded-full bg-slate-700/90" />
+            <span className="w-2.5 h-2.5 rounded-full bg-slate-700/90" />
+            <span className="w-2.5 h-2.5 rounded-full bg-slate-700/90" />
           </div>
-          <div className="px-2.5 py-0.5 rounded bg-slate-950/80 border border-slate-800 text-[10px] font-mono text-slate-400 truncate max-w-50">
-            {project.liveUrl.replace("https://", "")}
+
+          <div className="px-3 py-0.5 rounded-md bg-slate-950 border border-slate-800 text-[10px] font-mono text-slate-400 truncate max-w-[200px]">
+            {cleanDomain}
           </div>
-          <div className="flex items-center gap-1 text-[10px] font-medium text-emerald-400">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+
+          <div className="flex items-center gap-1.5 text-[10px] font-medium text-emerald-400">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
             Live
           </div>
         </div>
 
-        {/* Thumbnail Image with High Clarity */}
+        {/* Thumbnail Image with Smooth Hover Lift */}
         {project.thumbnail ? (
-          <div className="relative w-full h-[calc(100%-28px)] bg-slate-900">
+          <div className="relative w-full h-[calc(100%-32px)] bg-slate-900 overflow-hidden">
             <Image
               src={project.thumbnail}
               alt={project.title}
               fill
-              className="object-cover group-hover:scale-[1.02] transition-transform duration-300 ease-out"
+              className="object-cover object-top group-hover:scale-[1.03] transition-transform duration-500 ease-out"
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
           </div>
         ) : (
-          <div className="relative w-full h-[calc(100%-28px)] bg-slate-900/90 p-4 flex flex-col justify-between">
+          <div className="relative w-full h-[calc(100%-32px)] bg-slate-900/90 p-4 flex flex-col justify-between">
             {isDevJudge && (
               <div className="space-y-2 font-mono text-xs text-indigo-300">
                 <div className="flex items-center gap-2 text-slate-400 pb-1 border-b border-slate-800">
@@ -55,29 +59,6 @@ export function Projects({ projects = [] }: { projects?: ProjectData[] }) {
                 <p className="text-slate-300">&bull; Test 01: Input Memory Allocation [PASS 12ms]</p>
                 <div className="mt-2 p-1.5 rounded bg-emerald-950/50 border border-emerald-500/30 text-emerald-400 text-[11px] font-semibold">
                   &#x2713; All Test Suites Passed
-                </div>
-              </div>
-            )}
-
-            {isNexusFlow && (
-              <div className="space-y-2 text-xs">
-                <div className="flex items-center gap-2 text-slate-400 pb-1 border-b border-slate-800">
-                  <Kanban className="w-3.5 h-3.5 text-violet-400" />
-                  <span>Sprint Board &bull; Optimistic Drag-and-Drop</span>
-                </div>
-                <div className="grid grid-cols-3 gap-1.5 pt-1">
-                  <div className="p-2 rounded bg-slate-950/80 border border-slate-800 space-y-1">
-                    <span className="text-[10px] font-bold text-slate-400 uppercase">To Do</span>
-                    <div className="p-1 rounded bg-slate-900 text-[11px] text-white">OAuth Webhook</div>
-                  </div>
-                  <div className="p-2 rounded bg-slate-950/80 border border-indigo-500/40 space-y-1">
-                    <span className="text-[10px] font-bold text-indigo-400 uppercase">In Dev</span>
-                    <div className="p-1 rounded bg-indigo-950/50 text-[11px] text-indigo-200">WebSocket Sync</div>
-                  </div>
-                  <div className="p-2 rounded bg-slate-950/80 border border-slate-800 space-y-1">
-                    <span className="text-[10px] font-bold text-emerald-400 uppercase">Done</span>
-                    <div className="p-1 rounded bg-slate-900 text-[11px] text-emerald-300">LexoRank DB</div>
-                  </div>
                 </div>
               </div>
             )}
@@ -107,7 +88,7 @@ export function Projects({ projects = [] }: { projects?: ProjectData[] }) {
   };
 
   return (
-    <section id="projects" className="py-16 sm:py-20 relative overflow-hidden bg-slate-950">
+    <section id="projects" className="py-16 sm:py-20 relative overflow-hidden bg-slate-950/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-12 space-y-2.5">
@@ -121,17 +102,16 @@ export function Projects({ projects = [] }: { projects?: ProjectData[] }) {
             Featured Projects
           </h2>
           <p className="text-sm sm:text-base text-slate-400 leading-relaxed">
-            Production applications I&apos;ve designed and built, highlighting real-world technical constraints,
-            architecture, and code.
+            Full-stack production applications demonstrating real-world constraints, clean architecture, and modern TypeScript workflows.
           </p>
         </div>
 
         {/* Projects Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7">
-          {projects.map(project => (
+          {projects.map((project) => (
             <Card
               key={project.id || project.slug}
-              className="flex flex-col overflow-hidden border border-slate-800 bg-slate-900/80 hover:border-slate-700 hover:bg-slate-900/95 transition-all duration-200 hover:-translate-y-1 hover:shadow-xl group rounded-2xl"
+              className="flex flex-col overflow-hidden border border-slate-800/90 bg-slate-900/60 hover:bg-slate-900/90 hover:border-slate-700/90 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-indigo-950/30 group rounded-2xl card-sheen"
             >
               {/* Preview Frame */}
               {renderProjectVisual(project)}
@@ -140,8 +120,9 @@ export function Projects({ projects = [] }: { projects?: ProjectData[] }) {
               <CardContent className="p-5 sm:p-6 flex-1 flex flex-col justify-between space-y-5">
                 <div className="space-y-3">
                   <div className="space-y-1.5">
-                    <h3 className="text-lg sm:text-xl font-bold text-white group-hover:text-indigo-300 transition-colors tracking-tight">
-                      {project.title}
+                    <h3 className="text-lg font-bold text-white group-hover:text-indigo-300 transition-colors tracking-tight flex items-center justify-between">
+                      <span>{project.title}</span>
+                      <ArrowRight className="w-4 h-4 text-slate-500 group-hover:text-indigo-400 group-hover:translate-x-0.5 transition-all opacity-0 group-hover:opacity-100" />
                     </h3>
                     <p className="text-xs sm:text-sm text-slate-300 leading-relaxed line-clamp-3">
                       {project.shortOverview}
@@ -150,16 +131,16 @@ export function Projects({ projects = [] }: { projects?: ProjectData[] }) {
 
                   {/* Curated Tech Stack Chips */}
                   <div className="flex flex-wrap gap-1.5 pt-1">
-                    {project.techStack.slice(0, 4).map(tech => (
+                    {project.techStack.slice(0, 4).map((tech) => (
                       <span
                         key={tech}
-                        className="px-2.5 py-0.5 rounded-md bg-slate-800 border border-slate-700/80 text-[11px] font-mono text-slate-300"
+                        className="px-2.5 py-0.5 rounded-md bg-slate-800/80 border border-slate-700/60 text-[11px] font-mono text-slate-300"
                       >
                         {tech}
                       </span>
                     ))}
                     {project.techStack.length > 4 && (
-                      <span className="px-2 py-0.5 rounded-md bg-slate-800/80 border border-slate-700 text-[11px] font-mono text-slate-400">
+                      <span className="px-2 py-0.5 rounded-md bg-slate-800/50 border border-slate-700/50 text-[11px] font-mono text-slate-400">
                         +{project.techStack.length - 4}
                       </span>
                     )}
@@ -167,12 +148,12 @@ export function Projects({ projects = [] }: { projects?: ProjectData[] }) {
                 </div>
 
                 {/* Actions */}
-                <div className="pt-4 border-t border-slate-800 flex flex-col gap-2.5">
+                <div className="pt-4 border-t border-slate-800/80 flex flex-col gap-2.5">
                   <div className="flex items-center gap-2">
                     <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="flex-1">
                       <Button
                         size="sm"
-                        className="w-full gap-1.5 font-semibold text-xs bg-indigo-600 hover:bg-indigo-500 text-white cursor-pointer shadow-sm transition-all duration-150 active:scale-[0.98]"
+                        className="w-full gap-1.5 font-semibold text-xs bg-indigo-600 hover:bg-indigo-500 text-white cursor-pointer shadow-md shadow-indigo-600/20 transition-all duration-150 active:scale-[0.98]"
                       >
                         <ExternalLink className="w-3.5 h-3.5" />
                         Live Demo
@@ -183,7 +164,7 @@ export function Projects({ projects = [] }: { projects?: ProjectData[] }) {
                       <Button
                         variant="outline"
                         size="sm"
-                        className="gap-1.5 text-xs border-slate-700 bg-slate-900 hover:bg-slate-800 text-slate-300 cursor-pointer transition-all duration-150 active:scale-[0.98]"
+                        className="gap-1.5 text-xs font-semibold border-slate-700/80 bg-slate-900 hover:bg-slate-800 text-slate-300 cursor-pointer card-sheen transition-all duration-150 active:scale-[0.98]"
                         title="View GitHub Repository"
                       >
                         <Github className="w-3.5 h-3.5" />
@@ -196,9 +177,9 @@ export function Projects({ projects = [] }: { projects?: ProjectData[] }) {
                     <Button
                       variant="secondary"
                       size="sm"
-                      className="w-full justify-center gap-1.5 text-xs font-semibold text-slate-300 hover:text-white bg-slate-800/80 hover:bg-slate-700 cursor-pointer transition-colors border border-slate-700/60"
+                      className="w-full justify-center gap-1.5 text-xs font-semibold text-slate-300 hover:text-white bg-slate-800/60 hover:bg-slate-800 cursor-pointer transition-colors border border-slate-700/50"
                     >
-                      Case Study & Architecture
+                      View More / Details
                       <ArrowRight className="w-3.5 h-3.5" />
                     </Button>
                   </Link>

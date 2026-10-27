@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Briefcase, Calendar, MapPin, CheckCircle2 } from "lucide-react";
+import { Calendar, MapPin, CheckCircle2 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import type { ExperienceData } from "@/lib/api";
@@ -21,19 +21,19 @@ export function Experience({ experiences = [] }: { experiences?: ExperienceData[
             Work Experience
           </h2>
           <p className="text-sm sm:text-base text-slate-400 leading-relaxed">
-            Professional roles where I shipped features and contributed in distributed teams.
+            Roles where I engineered production features, collaborated across timezones, and shipped reliable software.
           </p>
         </div>
 
         {/* Timeline Container */}
-        <div className="max-w-3xl mx-auto relative pl-6 sm:pl-8 border-l border-slate-800 space-y-8">
+        <div className="max-w-3xl mx-auto relative pl-6 sm:pl-8 border-l border-slate-800/80 space-y-8">
           {experiences.map((exp, idx) => (
             <div key={exp.id || idx} className="relative group">
               {/* Timeline Indicator Dot */}
-              <div className="absolute -left-[31px] sm:-left-[39px] top-1.5 w-3.5 h-3.5 rounded-full bg-indigo-500 border-4 border-slate-950 group-hover:scale-110 transition-transform duration-200" />
+              <div className="absolute -left-[31px] sm:-left-[39px] top-2 w-3.5 h-3.5 rounded-full bg-indigo-500 ring-4 ring-slate-950 group-hover:scale-125 group-hover:ring-indigo-500/40 transition-all duration-300" />
 
-              <Card className="border border-slate-800 bg-slate-900/80 hover:bg-slate-900/95 hover:border-slate-700 transition-all duration-200 hover:-translate-y-0.5 rounded-2xl shadow-lg">
-                <CardContent className="p-5 sm:p-7 space-y-3.5">
+              <Card className="border border-slate-800/90 bg-slate-900/60 hover:bg-slate-900/90 hover:border-slate-700/80 transition-all duration-300 hover:-translate-y-0.5 rounded-2xl shadow-xl card-sheen">
+                <CardContent className="p-5 sm:p-7 space-y-4">
                   {/* Company & Role Header */}
                   <div className="flex flex-wrap items-center justify-between gap-2">
                     <div>
@@ -84,11 +84,11 @@ export function Experience({ experiences = [] }: { experiences?: ExperienceData[
 
                   {/* Tech Stack Used */}
                   {exp.techStack && exp.techStack.length > 0 && (
-                    <div className="pt-2.5 flex flex-wrap gap-1.5 border-t border-slate-800">
+                    <div className="pt-3 flex flex-wrap gap-1.5 border-t border-slate-800/80">
                       {exp.techStack.map((tech) => (
                         <span
                           key={tech}
-                          className="px-2 py-0.5 rounded bg-slate-800 border border-slate-700/80 text-[11px] font-mono text-slate-300"
+                          className="px-2.5 py-0.5 rounded-md bg-slate-800/80 border border-slate-700/60 text-[11px] font-mono text-slate-300"
                         >
                           {tech}
                         </span>

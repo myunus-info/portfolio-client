@@ -1,30 +1,19 @@
-import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import {
-  ArrowLeft,
-  ExternalLink,
-  Github,
-  AlertCircle,
-  TrendingUp,
-  Cpu,
-  Layers,
-  CheckCircle2,
-  Share2,
-} from "lucide-react";
+import { ArrowLeft, ExternalLink, Github, AlertCircle, TrendingUp, Cpu, Layers } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { ProjectData, getProjectBySlug, getAllProjectSlugs } from "@/lib/api";
+import { getProjectBySlug, getAllProjectSlugs } from "@/lib/api";
 
 interface ProjectDetailsProps {
   params: Promise<{ slug: string }>;
 }
 
 export function generateStaticParams() {
-  return getAllProjectSlugs().map((slug) => ({ slug }));
+  return getAllProjectSlugs().map(slug => ({ slug }));
 }
 
 export default async function ProjectDetailsPage({ params }: ProjectDetailsProps) {
@@ -44,11 +33,7 @@ export default async function ProjectDetailsPage({ params }: ProjectDetailsProps
         {/* Back Button */}
         <div>
           <Link href="/#projects">
-            <Button
-              variant="outline"
-              size="sm"
-              className="gap-2 text-slate-400 hover:text-white border-slate-800"
-            >
+            <Button variant="outline" size="sm" className="gap-2 text-slate-400 hover:text-white border-slate-800">
               <ArrowLeft className="w-4 h-4" />
               Back to Projects
             </Button>
@@ -70,28 +55,18 @@ export default async function ProjectDetailsPage({ params }: ProjectDetailsProps
             {project.title}
           </h1>
 
-          <p className="text-base sm:text-lg text-slate-300 leading-relaxed max-w-3xl">
-            {project.shortOverview}
-          </p>
+          <p className="text-base sm:text-lg text-slate-300 leading-relaxed max-w-3xl">{project.shortOverview}</p>
 
           {/* Action Links Bar */}
           <div className="flex flex-wrap items-center gap-3 pt-3">
-            <a
-              href={project.liveUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
               <Button size="lg" className="gap-2 bg-indigo-600 hover:bg-indigo-500 shadow-indigo-600/30">
                 <ExternalLink className="w-4 h-4" />
                 Open Live Project
               </Button>
             </a>
 
-            <a
-              href={project.clientRepoUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <a href={project.clientRepoUrl} target="_blank" rel="noopener noreferrer">
               <Button
                 variant="outline"
                 size="lg"
@@ -103,11 +78,7 @@ export default async function ProjectDetailsPage({ params }: ProjectDetailsProps
             </a>
 
             {project.serverRepoUrl && (
-              <a
-                href={project.serverRepoUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <a href={project.serverRepoUrl} target="_blank" rel="noopener noreferrer">
                 <Button
                   variant="outline"
                   size="lg"
@@ -122,14 +93,8 @@ export default async function ProjectDetailsPage({ params }: ProjectDetailsProps
         </div>
 
         {/* Hero Image Showcase */}
-        <div className="relative w-full h-80 sm:h-[450px] rounded-2xl overflow-hidden border border-slate-800 shadow-2xl bg-slate-900">
-          <Image
-            src={project.thumbnail}
-            alt={project.title}
-            fill
-            priority
-            className="object-cover"
-          />
+        <div className="relative w-full h-80 sm:h-112.5 rounded-2xl overflow-hidden border border-slate-800 shadow-2xl bg-slate-900">
+          <Image src={project.thumbnail} alt={project.title} fill priority className="object-cover" />
         </div>
 
         {/* Main Technology Stack Used */}
@@ -140,7 +105,7 @@ export default async function ProjectDetailsPage({ params }: ProjectDetailsProps
               <h3>Main Technology Stack</h3>
             </div>
             <div className="flex flex-wrap gap-2.5">
-              {project.techStack.map((tech) => (
+              {project.techStack.map(tech => (
                 <span
                   key={tech}
                   className="px-3.5 py-1.5 rounded-xl bg-slate-800/90 border border-slate-700/80 text-sm font-mono font-medium text-slate-200"
@@ -180,9 +145,7 @@ export default async function ProjectDetailsPage({ params }: ProjectDetailsProps
             <div className="space-y-4">
               <div className="flex items-center gap-2.5 text-amber-400">
                 <AlertCircle className="w-6 h-6 shrink-0" />
-                <h3 className="text-2xl font-bold text-white">
-                  Challenges Faced & How Solved
-                </h3>
+                <h3 className="text-2xl font-bold text-white">Challenges Faced & How Solved</h3>
               </div>
               <div className="p-6 rounded-2xl bg-amber-500/5 border border-amber-500/20 text-slate-200 text-sm sm:text-base leading-relaxed space-y-2">
                 <p>{project.challengesFaced}</p>
@@ -195,9 +158,7 @@ export default async function ProjectDetailsPage({ params }: ProjectDetailsProps
             <div className="space-y-4">
               <div className="flex items-center gap-2.5 text-emerald-400">
                 <TrendingUp className="w-6 h-6 shrink-0" />
-                <h3 className="text-2xl font-bold text-white">
-                  Potential Improvements & Future Roadmap
-                </h3>
+                <h3 className="text-2xl font-bold text-white">Potential Improvements & Future Roadmap</h3>
               </div>
               <div className="p-6 rounded-2xl bg-emerald-500/5 border border-emerald-500/20 text-slate-200 text-sm sm:text-base leading-relaxed space-y-2">
                 <p>{project.futureImprovements}</p>
@@ -213,9 +174,7 @@ export default async function ProjectDetailsPage({ params }: ProjectDetailsProps
               <div className="space-y-3 text-xs sm:text-sm">
                 <div>
                   <span className="text-slate-400 block">Category:</span>
-                  <span className="font-semibold text-slate-200">
-                    Full-Stack Application
-                  </span>
+                  <span className="font-semibold text-slate-200">Full-Stack Application</span>
                 </div>
                 <div>
                   <span className="text-slate-400 block">Live Deployment:</span>
@@ -256,12 +215,7 @@ export default async function ProjectDetailsPage({ params }: ProjectDetailsProps
 
               <Separator className="bg-slate-800" />
 
-              <a
-                href={project.liveUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block"
-              >
+              <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="block">
                 <Button className="w-full gap-2 bg-indigo-600 hover:bg-indigo-500 text-sm">
                   <ExternalLink className="w-4 h-4" />
                   Launch Project

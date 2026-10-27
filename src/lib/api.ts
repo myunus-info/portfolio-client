@@ -5,7 +5,6 @@ import {
   experiencesData,
   educationsData,
   blogsData,
-  testimonialsData,
 } from "@/data/portfolio";
 
 // Data models
@@ -98,16 +97,6 @@ export interface BlogData {
   createdAt: string;
 }
 
-export interface TestimonialData {
-  id: string;
-  authorName: string;
-  authorRole: string;
-  company: string;
-  avatar: string;
-  content: string;
-  rating: number;
-}
-
 // Standalone data getters (no external backend dependency)
 export async function getPortfolioData() {
   return {
@@ -117,7 +106,6 @@ export async function getPortfolioData() {
     experiences: experiencesData,
     educations: educationsData,
     blogs: blogsData,
-    testimonials: testimonialsData,
   };
 }
 

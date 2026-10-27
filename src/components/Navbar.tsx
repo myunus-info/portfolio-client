@@ -2,16 +2,13 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { Menu, FileText, Calendar } from "lucide-react";
+import { Menu, FileText, Calendar, ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { Sheet } from "@/components/ui/sheet";
-import { ResumeModal } from "@/components/ResumeModal";
 import type { ProfileData } from "@/lib/api";
 
 export function Navbar({ profile }: { profile?: ProfileData | null }) {
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  const [resumeOpen, setResumeOpen] = React.useState(false);
   const [scrolled, setScrolled] = React.useState(false);
 
   React.useEffect(() => {
@@ -23,13 +20,22 @@ export function Navbar({ profile }: { profile?: ProfileData | null }) {
   }, []);
 
   const navLinks = [
-    { name: "Projects", href: "/#projects" },
-    { name: "Skills", href: "/#skills" },
-    { name: "Experience", href: "/#experience" },
     { name: "About", href: "/#about" },
+    { name: "Skills", href: "/#skills" },
+    { name: "Projects", href: "/#projects" },
+    { name: "Experience", href: "/#experience" },
     { name: "Education", href: "/#education" },
-    { name: "Articles", href: "/#blogs" },
     { name: "Contact", href: "/#contact" },
+  ];
+
+  const allMobileLinks = [
+    { name: "Selected Work", href: "/#projects" },
+    { name: "Tech Stack", href: "/#skills" },
+    { name: "Work Experience", href: "/#experience" },
+    { name: "About & Setup", href: "/#about" },
+    { name: "Education & Certs", href: "/#education" },
+    { name: "Technical Notes", href: "/#blogs" },
+    { name: "Contact & Booking", href: "/#contact" },
   ];
 
   return (
@@ -44,11 +50,11 @@ export function Navbar({ profile }: { profile?: ProfileData | null }) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
           {/* Logo / Brand */}
           <Link href="/" className="flex items-center gap-2.5 group">
-            <div className="w-10 h-10 rounded-xl bg-linear-to-tr from-indigo-600 via-indigo-500 to-violet-500 flex items-center justify-center text-white font-black text-lg shadow-lg shadow-indigo-500/25 group-hover:scale-105 transition-transform">
+            <div className="w-9 h-9 rounded-xl bg-linear-to-tr from-indigo-600 via-indigo-500 to-violet-500 flex items-center justify-center text-white font-black text-base shadow-md shadow-indigo-500/25 group-hover:scale-105 transition-transform">
               Y
             </div>
             <div className="flex flex-col">
-              <span className="font-bold text-white text-base tracking-tight group-hover:text-indigo-400 transition-colors">
+              <span className="font-bold text-white text-sm tracking-tight group-hover:text-indigo-400 transition-colors">
                 {profile?.fullName || "Muhammad Yunus"}
               </span>
               <span className="text-[11px] text-slate-400 font-medium">Full-Stack Engineer</span>
@@ -56,12 +62,12 @@ export function Navbar({ profile }: { profile?: ProfileData | null }) {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-1.5 lg:gap-2 bg-slate-900/60 border border-slate-800/70 px-4 py-1.5 rounded-full backdrop-blur-md">
-            {navLinks.map(link => (
+          <nav className="hidden md:flex items-center gap-1 bg-slate-900/70 border border-slate-800/80 px-3 py-1 rounded-full backdrop-blur-md card-sheen">
+            {navLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
-                className="text-sm font-semibold text-slate-200 hover:text-white px-3.5 py-1.5 rounded-lg hover:bg-slate-800/80 transition-all"
+                className="text-xs font-medium text-slate-300 hover:text-white px-3 py-1.5 rounded-full hover:bg-slate-800/80 transition-all duration-150"
               >
                 {link.name}
               </a>
@@ -69,21 +75,35 @@ export function Navbar({ profile }: { profile?: ProfileData | null }) {
           </nav>
 
           {/* Action CTAs */}
-          <div className="hidden lg:flex items-center gap-3">
-            <Badge variant="success" className="py-1 px-3 hidden xl:inline-flex">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse mr-1" />
-              Available for Remote
-            </Badge>
+          <div className="hidden lg:flex items-center gap-2.5">
+            <div className="hidden xl:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-900/80 border border-slate-800 text-[11px] text-slate-300 font-medium">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              <span>Remote (EET)</span>
+            </div>
 
-            <Button variant="outline" size="sm" onClick={() => setResumeOpen(true)} className="gap-2 cursor-pointer">
-              <FileText className="w-4 h-4 text-indigo-400" />
-              Resume
-            </Button>
+            <a
+              href={profile?.resumeUrl || "/Muhammad_Yunus_Resume.pdf"}
+              download="Muhammad_Yunus_Resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Button
+                variant="outline"
+                size="sm"
+                className="gap-1.5 text-xs font-semibold cursor-pointer border-slate-700/80 bg-slate-900 hover:bg-slate-800 text-slate-200 card-sheen transition-all duration-150 active:scale-[0.98]"
+              >
+                <FileText className="w-3.5 h-3.5 text-indigo-400" />
+                Resume
+              </Button>
+            </a>
 
             {profile?.calendlyUrl && (
               <a href={profile.calendlyUrl} target="_blank" rel="noopener noreferrer">
-                <Button size="sm" className="gap-2 cursor-pointer">
-                  <Calendar className="w-4 h-4" />
+                <Button
+                  size="sm"
+                  className="gap-1.5 text-xs font-semibold cursor-pointer bg-indigo-600 hover:bg-indigo-500 text-white shadow-md shadow-indigo-600/20 transition-all duration-150 active:scale-[0.98]"
+                >
+                  <Calendar className="w-3.5 h-3.5" />
                   Book Call
                 </Button>
               </a>
@@ -92,15 +112,27 @@ export function Navbar({ profile }: { profile?: ProfileData | null }) {
 
           {/* Mobile Menu Trigger */}
           <div className="flex items-center gap-2 md:hidden">
-            <Button variant="outline" size="sm" onClick={() => setResumeOpen(true)} className="px-2.5">
-              <FileText className="w-4 h-4 text-indigo-400" />
-            </Button>
+            <a
+              href={profile?.resumeUrl || "/Muhammad_Yunus_Resume.pdf"}
+              download="Muhammad_Yunus_Resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Download Resume"
+            >
+              <Button
+                variant="outline"
+                size="sm"
+                className="px-2.5 text-xs border-slate-700 bg-slate-900 text-slate-200 cursor-pointer"
+              >
+                <FileText className="w-3.5 h-3.5 text-indigo-400" />
+              </Button>
+            </a>
             <button
               onClick={() => setMobileOpen(true)}
-              className="p-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800"
+              className="p-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800 transition-colors"
               aria-label="Open Navigation"
             >
-              <Menu className="w-6 h-6" />
+              <Menu className="w-5 h-5" />
             </button>
           </div>
         </div>
@@ -109,40 +141,45 @@ export function Navbar({ profile }: { profile?: ProfileData | null }) {
       {/* Mobile Drawer */}
       <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
         <div className="flex items-center gap-3 mb-6 pb-4 border-b border-slate-800">
-          <div className="w-10 h-10 rounded-xl bg-linear-to-tr from-indigo-600 to-violet-500 flex items-center justify-center text-white font-bold text-lg">
+          <div className="w-9 h-9 rounded-xl bg-linear-to-tr from-indigo-600 to-violet-500 flex items-center justify-center text-white font-bold text-base">
             Y
           </div>
           <div>
-            <h4 className="font-bold text-white text-base">{profile?.fullName || "Muhammad Yunus"}</h4>
-            <p className="text-xs text-indigo-400">Available for Remote Roles</p>
+            <h4 className="font-bold text-white text-sm">{profile?.fullName || "Muhammad Yunus"}</h4>
+            <p className="text-xs text-indigo-400">Full-Stack Engineer • Remote</p>
           </div>
         </div>
 
-        <nav className="flex flex-col gap-2">
-          {navLinks.map(link => (
+        <nav className="flex flex-col gap-1.5">
+          {allMobileLinks.map((link) => (
             <a
               key={link.name}
               href={link.href}
               onClick={() => setMobileOpen(false)}
-              className="flex items-center justify-between text-slate-200 hover:text-indigo-400 py-2.5 px-3 rounded-lg hover:bg-slate-800/60 font-medium text-base transition-colors"
+              className="flex items-center justify-between text-slate-300 hover:text-white py-2 px-3 rounded-lg hover:bg-slate-800/60 font-medium text-sm transition-colors"
             >
-              {link.name}
+              <span>{link.name}</span>
+              <ArrowUpRight className="w-3.5 h-3.5 text-slate-500" />
             </a>
           ))}
         </nav>
 
-        <div className="mt-auto pt-6 border-t border-slate-800 flex flex-col gap-3">
-          <Button
-            variant="outline"
-            className="w-full justify-center gap-2"
-            onClick={() => {
-              setMobileOpen(false);
-              setResumeOpen(true);
-            }}
+        <div className="mt-auto pt-6 border-t border-slate-800 flex flex-col gap-2.5">
+          <a
+            href={profile?.resumeUrl || "/Muhammad_Yunus_Resume.pdf"}
+            download="Muhammad_Yunus_Resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => setMobileOpen(false)}
           >
-            <FileText className="w-4 h-4 text-indigo-400" />
-            View & Download Resume
-          </Button>
+            <Button
+              variant="outline"
+              className="w-full justify-center gap-2 text-xs font-semibold border-slate-700 bg-slate-900 text-white cursor-pointer"
+            >
+              <FileText className="w-4 h-4 text-indigo-400" />
+              Download Resume
+            </Button>
+          </a>
 
           {profile?.calendlyUrl && (
             <a
@@ -151,7 +188,7 @@ export function Navbar({ profile }: { profile?: ProfileData | null }) {
               rel="noopener noreferrer"
               onClick={() => setMobileOpen(false)}
             >
-              <Button className="w-full justify-center gap-2">
+              <Button className="w-full justify-center gap-2 text-xs font-semibold bg-indigo-600 hover:bg-indigo-500 text-white">
                 <Calendar className="w-4 h-4" />
                 Schedule Intro Call
               </Button>
@@ -159,9 +196,6 @@ export function Navbar({ profile }: { profile?: ProfileData | null }) {
           )}
         </div>
       </Sheet>
-
-      {/* Resume Modal */}
-      <ResumeModal open={resumeOpen} onOpenChange={setResumeOpen} profile={profile} />
     </>
   );
 }

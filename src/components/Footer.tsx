@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { ArrowUp, Github, Linkedin, Twitter } from "lucide-react";
+import { ArrowUp, Github, Linkedin, Twitter, Facebook } from "lucide-react";
 import type { ProfileData } from "@/lib/api";
 
 export function Footer({ profile }: { profile?: ProfileData | null }) {
@@ -71,6 +71,28 @@ export function Footer({ profile }: { profile?: ProfileData | null }) {
                   aria-label="LinkedIn"
                 >
                   <Linkedin className="w-3.5 h-3.5" />
+                </a>
+              )}
+              {profile?.socialTwitter && (
+                <a
+                  href={profile.socialTwitter}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-8 h-8 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:border-slate-700 transition-all duration-150"
+                  aria-label="Twitter / X"
+                >
+                  <Twitter className="w-3.5 h-3.5" />
+                </a>
+              )}
+              {profile?.socialFacebook && (
+                <a
+                  href={profile.socialFacebook}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-8 h-8 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:border-slate-700 transition-all duration-150"
+                  aria-label="Facebook"
+                >
+                  <Facebook className="w-3.5 h-3.5" />
                 </a>
               )}
             </div>

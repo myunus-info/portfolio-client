@@ -5,7 +5,6 @@ import { Skills } from "@/components/Skills";
 import { Projects } from "@/components/Projects";
 import { Experience } from "@/components/Experience";
 import { Education } from "@/components/Education";
-import { Testimonials } from "@/components/Testimonials";
 import { Blogs } from "@/components/Blogs";
 import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
@@ -28,7 +27,6 @@ export default async function HomePage() {
         <About profile={data.profile} />
         <Education educations={data.educations} />
         <Blogs blogs={data.blogs} />
-        <Testimonials testimonials={data.testimonials} />
         <Contact profile={data.profile} />
       </main>
 

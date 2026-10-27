@@ -2,12 +2,11 @@ import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, Clock, Calendar, Tag, Share2 } from "lucide-react";
+import { ArrowLeft, Clock, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Card } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { BlogData, getBlogBySlug, getAllBlogSlugs } from "@/lib/api";
+import { getBlogBySlug, getAllBlogSlugs } from "@/lib/api";
 
 interface BlogDetailsProps {
   params: Promise<{ slug: string }>;
