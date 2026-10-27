@@ -128,7 +128,7 @@ export const educationsData: EducationData[] = [
     institution: "Uttara University",
     degree: "Bachelor of Arts in English Language & Literature (1 Year Completed)",
     fieldOfStudy: "English Language & Literature",
-    startDate: "2020-01-01",
+    startDate: "2019-01-01",
     endDate: "2020-01-01",
     grade: "CGPA 3.92 / 4.00 (High Honors)",
     description:
