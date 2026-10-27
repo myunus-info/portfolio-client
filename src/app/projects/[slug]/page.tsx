@@ -27,7 +27,7 @@ export default async function ProjectDetailsPage({ params }: ProjectDetailsProps
   return (
     <main className="min-h-screen pt-28 pb-20 relative bg-slate-950 text-slate-100">
       {/* Background Glow */}
-      <div className="absolute top-20 left-1/2 -translate-x-1/2 w-[700px] h-[400px] bg-indigo-600/10 rounded-full blur-[160px] pointer-events-none" />
+      <div className="absolute top-20 left-1/2 -translate-x-1/2 w-175 h-100 bg-indigo-600/10 rounded-full blur-[160px] pointer-events-none" />
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-12">
         {/* Back Button */}
@@ -130,7 +130,7 @@ export default async function ProjectDetailsPage({ params }: ProjectDetailsProps
               </p>
               {project.architecture && (
                 <div className="p-5 rounded-xl bg-slate-900/90 border border-slate-800/80 text-sm text-slate-300 leading-relaxed">
-                  <span className="font-bold text-indigo-400 block mb-1.5 flex items-center gap-2">
+                  <span className="font-bold text-indigo-400 mb-1.5 flex items-center gap-2">
                     <Cpu className="w-4 h-4" />
                     System Architecture Highlights
                   </span>
